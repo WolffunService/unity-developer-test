@@ -1,3 +1,111 @@
+# Recruitment Test — Unity Developer
+
+**Company:** Wolffun
+**Position:** Unity Developer
+**Duration:** 5 days from the date of receipt
+**Unity Version:** 2022.3 LTS (any patch)
+
+---
+
+## 1. Overview
+
+Build a **prototype** for a casual **Pixel Destruction** game — players use tools (weapons) to cut and destroy objects as required by each level.
+
+**Gameplay reference:**
+https://play.google.com/store/apps/details?id=com.dalakgames.pixeldestruction
+
+> Candidates should install and play the reference game before starting the test.
+
+---
+
+## 2. Required Features
+
+### 2.1. Core Gameplay
+
+- [ ] Players can **drag/swipe** to control the weapon to cut objects
+- [ ] Cut objects must have realistic physics responses (fall, split apart, etc.)
+- [ ] Clear **win/lose** conditions for each level
+- [ ] **Basic UI**: gameplay screen, win/lose screen, replay button
+
+### 2.2. Weapon — Saw
+
+- [ ] Implement at least **1 weapon: circular saw**
+- [ ] The saw must have a spinning animation while active
+- [ ] Cutting must provide visual feedback (particles, trails, or similar)
+- [ ] The saw must interact correctly with objects — only cuts on contact, no clipping through
+
+### 2.3. Levels
+
+- [ ] Minimum **5 levels** with progressive difficulty
+- [ ] Each level has a different object layout
+- [ ] A **level transition** system (level selection or auto-advance)
+
+### 2.4. Level Editor Tool (Editor Window / Custom Inspector)
+
+- [ ] Create a **Unity Editor Tool** (using `EditorWindow`, `CustomEditor`, or `ScriptableObject` workflow) to support Game Designers:
+  - **Create and arrange objects** in a level through a visual interface (no coding required for GD)
+  - **Configure object properties** (material, size, destructible or not, etc.)
+  - **Save/Load level data** — level config should be stored as data, **ScriptableObject** is recommended. No hard-coding in scenes
+
+> **Purpose:** Evaluate the ability to build tools that support team workflow, not just gameplay coding.
+
+---
+
+## 3. Evaluation Criteria
+
+| Criteria | Weight | Description |
+|----------|--------|-------------|
+| **Code Quality** | 35% | Clean code, clear naming, proper separation of concerns, no hard-coding |
+| **Gameplay Feel** | 25% | Smooth cutting feel, reasonable physics, good visual feedback |
+| **Level Editor Tool** | 20% | Easy to use, GD-friendly, save/load works correctly |
+| **Project Structure** | 15% | Clean folder structure, proper use of prefabs, easy to extend |
+| **Level Design** | 5% | 5 levels with variety and reasonable progression |
+
+### Bonus (Optional)
+
+- Additional weapon (hammer, laser, etc.)
+- Sound effects & juice (screen shake, slow-motion on cut, etc.)
+- Object pooling for debris
+- Scoring system (stars, points)
+- Responsive UI for multiple screen ratios
+- **Addressable Asset System** for asset management and loading
+- **Performance optimization** (profiling, reduced GC allocation, draw call batching, etc.)
+
+---
+
+## 4. Submission
+
+### Required:
+
+1. **Source code** — push to a **GitHub** repository and share the link
+2. **APK build** — a working APK for Android (or Windows build if no Android device is available)
+3. **README.md** in the repo including:
+   - How to open and run the project
+   - Brief explanation of the code architecture (main systems)
+   - How to use the Level Editor Tool (with screenshots if possible)
+   - What you would improve given more time
+
+### Notes:
+
+- **DO NOT** copy code from tutorials without understanding it — there will be a technical interview about your code
+- Commit frequently with clear messages — we will review git history
+- Prioritize **completing all required features** before working on bonuses
+
+---
+
+## 5. After Submission
+
+1. **Code Review** — the team will review source code and git history
+2. **Technical Interview (30–45 min)** — explain design decisions, walk through code, answer implementation questions
+3. **Result** — feedback within 3 business days after the interview
+
+---
+
+**Good luck! If you have any questions about the test, please contact us via the recruitment email.**
+
+---
+---
+
 # Bài Test Tuyển Dụng — Unity Developer
 
 **Công ty:** Wolffun
@@ -7,7 +115,7 @@
 
 ---
 
-## 1. Tổng Quan / Overview
+## 1. Tổng Quan
 
 Xây dựng **prototype** cho một game casual dạng **Pixel Destruction** — người chơi sử dụng các công cụ (weapon) để cắt, phá hủy các vật thể theo yêu cầu của từng level.
 
@@ -18,7 +126,7 @@ https://play.google.com/store/apps/details?id=com.dalakgames.pixeldestruction
 
 ---
 
-## 2. Yêu Cầu Bắt Buộc / Required Features
+## 2. Yêu Cầu Bắt Buộc
 
 ### 2.1. Core Gameplay
 
@@ -51,7 +159,7 @@ https://play.google.com/store/apps/details?id=com.dalakgames.pixeldestruction
 
 ---
 
-## 3. Tiêu Chí Đánh Giá / Evaluation Criteria
+## 3. Tiêu Chí Đánh Giá
 
 | Tiêu chí | Trọng số | Mô tả |
 |-----------|----------|-------|
@@ -61,7 +169,7 @@ https://play.google.com/store/apps/details?id=com.dalakgames.pixeldestruction
 | **Project Structure** | 15% | Folder structure gọn gàng, prefab hợp lý, dễ mở rộng |
 | **Level Design** | 5% | 5 levels có sự đa dạng và progression hợp lý |
 
-### Điểm cộng (Bonus — không bắt buộc)
+### Điểm Cộng (Bonus — Không Bắt Buộc)
 
 - Thêm weapon thứ 2 (búa, laser, v.v.)
 - Sound effects & juice (screen shake, slow-motion khi cắt, v.v.)
@@ -73,7 +181,7 @@ https://play.google.com/store/apps/details?id=com.dalakgames.pixeldestruction
 
 ---
 
-## 4. Yêu Cầu Nộp Bài / Submission
+## 4. Yêu Cầu Nộp Bài
 
 ### Bắt buộc:
 
@@ -93,10 +201,10 @@ https://play.google.com/store/apps/details?id=com.dalakgames.pixeldestruction
 
 ---
 
-## 5. Quy Trình Sau Khi Nộp / After Submission
+## 5. Quy Trình Sau Khi Nộp
 
 1. **Code Review** — Team sẽ review source code và git history
-2. **Phỏng vấn kỹ thuật (30-45 phút)** — Giải thích các quyết định thiết kế, walk through code, trả lời câu hỏi về implementation
+2. **Phỏng vấn kỹ thuật (30–45 phút)** — Giải thích các quyết định thiết kế, walk through code, trả lời câu hỏi về implementation
 3. **Kết quả** — Phản hồi trong vòng 3 ngày làm việc sau phỏng vấn
 
 ---
