@@ -22,6 +22,8 @@ https://play.google.com/store/apps/details?id=com.dalakgames.pixeldestruction
 
 ### 2.1. Core Gameplay
 
+> The prototype should be as close to the reference game as possible.
+
 **Objects:**
 - [ ] Objects are composed of **pixels** (small square units forming a shape)
 - [ ] Objects **fall from the top** of the screen under gravity
@@ -157,6 +159,8 @@ https://play.google.com/store/apps/details?id=com.dalakgames.pixeldestruction
 ## 2. Yêu Cầu Bắt Buộc
 
 ### 2.1. Core Gameplay
+
+> Prototype càng giống game gốc càng tốt.
 
 **Object (Vật thể):**
 - [ ] Vật thể được cấu thành từ **các pixel** (các ô vuông nhỏ tạo thành hình dạng)
