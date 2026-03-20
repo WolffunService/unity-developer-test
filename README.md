@@ -26,54 +26,58 @@ https://play.google.com/store/apps/details?id=com.dalakgames.pixeldestruction
 
 > The prototype should be as close to the reference game as possible.
 
-**Objects:**
-- [ ] Objects are composed of **pixels** (small square units forming a shape)
-- [ ] Objects **fall from the top** of the screen under gravity
-- [ ] When an object is **cut in half**, it splits into **2 smaller independent objects** (each behaves as its own physics body, as seen in the reference game)
-- [ ] Objects that are small enough pass through gaps between obstacles and continue falling
-- [ ] Objects that **reach the bottom** are converted into **experience points (XP)**. Conversion rate is configurable by GD (e.g., 1 pixel = 1 XP)
+**Overview:**
+- [ ] Each level has a **list of objects** that need to be cut. The game **spawns objects gradually** from above
+- [ ] The map contains **obstacles** that block **falling objects**
+- [ ] The player needs to **tap** or **place saws** to destroy the **objects**
 
-**Weapons — Saw (Circular Saw):**
-- [ ] The play area has **fixed positions** where weapons (saws) can be placed
-- [ ] The saw has a **spinning animation** while active
-- [ ] When an object contacts the saw, the saw **cuts through the object**, splitting it into smaller pieces
-- [ ] Cutting must have **visual feedback** (particles, trails, or similar)
+**Win Condition:**
+- [ ] The game is **won** when all objects are destroyed and successfully reach the bottom
 
-**Obstacles:**
-- [ ] The play area contains **obstacles** that block objects that are too large from passing through
-- [ ] Obstacles force the player to rely on weapons to cut objects small enough to fit through gaps
+**Object:**
+- [ ] Objects are made up of **pixels** (small square units forming a shape)
+- [ ] Objects **fall downward** due to gravity
+- [ ] When an object is **cut**, it splits into **smaller independent objects** (each piece behaves like its own physics body, similar to the reference game)
+- [ ] Small enough pieces can pass through gaps between obstacles and continue falling
+- [ ] When objects **reach the bottom**, they are converted into **experience points (XP)**. The conversion rate is configurable by GD (e.g., 1 pixel = 1 XP)
+
+**Weapon — Circular Saw:**
+- [ ] The level contains **fixed positions** where weapons (saws) can be placed
+- [ ] The saw has a **rotating animation** when active
+- [ ] When an object touches the saw, it is **cut through**, splitting into smaller pieces
+- [ ] Cutting effects must have **visual feedback** (particles, trails, or similar)
+
+**Obstacle:**
+- [ ] The level contains **obstacles** that prevent large objects from passing through
+- [ ] Obstacles force players to use weapons to cut objects small enough to fit through gaps
+- [ ] Saw placement positions also act as **obstacles**
 
 **Tap to Destroy:**
-- [ ] The player can **tap on a pixel** inside an object to deal damage to that pixel and surrounding pixels within a configurable radius
+- [ ] The player can **tap on an object** to deal damage to a pixel area
 - [ ] Damage is **highest at the center** (max damage) and **decreases with distance** (min damage at the edge of the radius)
 - [ ] GD can configure: **damage radius**, **max damage**, **min damage**
 
-**Leveling & Upgrades:**
-- [ ] Collecting enough XP causes the player to **level up**
-- [ ] XP required per level is configurable: **base XP** for level 1 and **XP increment** per subsequent level (e.g., base=100, increment=50 → level 1 needs 100, level 2 needs 150, level 3 needs 200...)
-- [ ] On each level up, the player is presented with **2 random upgrades** to choose from. The available upgrade pool is:
-  - Saw becomes **longer**
-  - Saw spins **faster**
-  - Saw deals **more DPS** (damage per second)
-  - Add **1 additional saw** (new saw placed at an available position)
-  - Add **1 extra blade** to all existing saws
-
-**Win Condition:**
-- [ ] Each level has a **list of objects** that need to be cut. The game drops objects **gradually** from the top
-- [ ] The game is **won** when all objects have been cut and have successfully reached the bottom
+**Upgrades Saw:**
+- [ ] Collect enough XP to **receive an upgrade**
+- [ ] XP required for each upgrade is configurable: **starting XP** and **increment per upgrade** (e.g., start = 100, increment = 50 → Upgrade 1 needs 100, Upgrade 2 needs 150, Upgrade 3 needs 200...)
+- [ ] Each time an upgrade is received, the player chooses **1 of 2 random upgrades**. Upgrade options include:
+  - **Larger saw**
+  - **Faster rotation speed**
+  - **Higher damage**
+  - Add **one new saw** (placed in an available slot chosen by the player)
 
 **UI:**
-- [ ] Number of **remaining objects** waiting to be dropped
-- [ ] Current **XP bar** (progress toward next level up)
-- [ ] Current **level** display
+- [ ] **XP progress bar** for upgrades
+- [ ] Current **level progress and information** (level number)
 
-### 2.2. Levels
+### 2.2. Level
 
-- [ ] Minimum **5 levels** with progressive difficulty (more objects, larger objects, tighter obstacle gaps, etc.)
-- [ ] Each level defines its own **object list**, **obstacle layout**, and **weapon positions**
-- [ ] A **level transition** system (level selection or auto-advance)
+- [ ] Minimum **5 levels** with increasing difficulty (more objects, larger objects, narrower obstacle gaps, etc.)
+- [ ] After each level, reset the **number of saws** (back to 0) and **all upgrades** (reset to default stats)
+- [ ] Each level defines its own **object list**, **obstacle layout**, and **weapon placement positions**
+- [ ] Includes a **level transition system** (level selection or auto-advance)
 
-### 2.4. Level Editor Tool (Editor Window / Custom Inspector)
+### 2.3. Level Editor Tool (Editor Window / Custom Inspector)
 
 - [ ] Create a **Unity Editor Tool** (using `EditorWindow`, `CustomEditor`, or `ScriptableObject` workflow) to support Game Designers:
   - **Create and arrange objects** in a level through a visual interface (no coding required for GD)
@@ -166,6 +170,14 @@ https://play.google.com/store/apps/details?id=com.dalakgames.pixeldestruction
 
 > Prototype càng giống game gốc càng tốt.
 
+**Overview:**
+- [ ] Mỗi level có **danh sách các object** cần được cắt. Game **thả từ từ** các object từ trên xuống
+- [ ] Trong map sẽ có **obstacle** chặn **object** rơi xuống
+- [ ] Người chơi cần **tap** hoặc **đặt cưa** để phá hủy các **object**
+
+**Win Condition:**
+- [ ] Game **chiến thắng** khi tất cả object đã được phá và chạm đáy thành công
+
 **Object (Vật thể):**
 - [ ] Vật thể được cấu thành từ **các pixel** (các ô vuông nhỏ tạo thành hình dạng)
 - [ ] Vật thể **rơi từ trên xuống** theo trọng lực
@@ -182,38 +194,34 @@ https://play.google.com/store/apps/details?id=com.dalakgames.pixeldestruction
 **Obstacle (Vật cản):**
 - [ ] Trong màn chơi có các **obstacle** ngăn cản vật thể quá to lọt qua
 - [ ] Obstacle buộc người chơi phải dùng weapon để cắt vật thể đủ nhỏ mới lọt qua khe
+- [ ] Vị trí đặt cưa cũng là **obstacle**
 
 **Tap to Destroy (Chạm để phá hủy):**
-- [ ] Người chơi có thể **tap vào 1 pixel** bên trong object để gây sát thương lên pixel đó và các pixel xung quanh trong bán kính quy định
+- [ ] Người chơi có thể **Object** để gây sát thương lên một vùng pixel.
 - [ ] Sát thương **cao nhất ở tâm** (max damage) và **giảm dần theo khoảng cách** (min damage ở rìa bán kính)
-- [ ] GD có thể config: **bán kính sát thương**, **sát thương max**, **sát thương min**
+- [ ] GD có thể config: **bán kính gây sát thương**, **sát thương max**, **sát thương min**
 
-**Leveling & Upgrades (Lên cấp & Nâng cấp):**
-- [ ] Thu thập đủ XP sẽ **lên level**
-- [ ] Mức XP yêu cầu mỗi level có thể config: **XP khởi đầu** và **mức tăng thêm** mỗi level (ví dụ: khởi đầu=100, tăng=50 → level 1 cần 100, level 2 cần 150, level 3 cần 200...)
-- [ ] Mỗi lần lên level, người chơi được chọn **1 trong 2 nâng cấp random**. Danh sách nâng cấp:
-  - Cái cưa **dài hơn**
+**Upgrades Saw:**
+- [ ] Thu thập đủ XP sẽ **nhận được Upgrade**
+- [ ] Mức XP yêu cầu sau mỗi lần Upgarde có thể config: **XP khởi đầu** và **mức tăng thêm** mỗi lần Upgrade (ví dụ: khởi đầu=100, tăng=50 → Lần Upgrade 1 cần 100, Lần Upgrade 2 cần 150, Lần Upgrade 3 cần 200...)
+- [ ] Mỗi lần nhận được Upgrade, người chơi được chọn **1 trong 2 nâng cấp random**. Danh sách nâng cấp:
+  - Cái cưa **to hơn**
   - Cái cưa **xoay nhanh hơn**
-  - Cái cưa **gây DPS cao hơn** (damage per second)
-  - Thêm **1 cưa mới** (đặt vào vị trí còn trống)
-  - Thêm **1 lưỡi cưa** vào tất cả các cưa hiện có
-
-**Điều kiện thắng:**
-- [ ] Mỗi level có **danh sách các object** cần được cắt. Game **thả từ từ** các object từ trên xuống
-- [ ] Game **chiến thắng** khi tất cả object đã được cắt và chạm đáy thành công
+  - Cái cưa **gây sát thương nhiều hơn**
+  - Thêm **1 cưa mới** (đặt vào vị trí còn trống do người chơi chọn)
 
 **UI:**
-- [ ] Số lượng **object còn lại** chờ được thả
-- [ ] **Thanh XP** hiện tại (tiến trình lên level tiếp theo)
-- [ ] Hiển thị **level hiện tại**
+- [ ] Tiến trình **Thanh XP để nhận Upgrade** 
+- [ ] Tiến trình và thông tin (level bao nhiêu) **level hiện tại**
 
 ### 2.2. Level
 
 - [ ] Tối thiểu **5 levels** với độ khó tăng dần (nhiều object hơn, object lớn hơn, khe obstacle hẹp hơn, v.v.)
+- [ ] Sau mỗi Level thì reset **số lượng cưa** (reset về 0) và **các nâng cấp** (reset về chỉ số Default) 
 - [ ] Mỗi level định nghĩa riêng **danh sách object**, **layout obstacle**, và **vị trí đặt weapon**
 - [ ] Có hệ thống **chuyển level** (level selection hoặc auto-advance)
 
-### 2.4. Level Editor Tool (Editor Window / Custom Inspector)
+### 2.3. Level Editor Tool (Editor Window / Custom Inspector)
 
 - [ ] Tạo **Unity Editor Tool** (dùng `EditorWindow`, `CustomEditor`, hoặc `ScriptableObject` workflow) để hỗ trợ Game Designer:
   - **Tạo và sắp xếp vật thể** trong level bằng giao diện trực quan (không cần GD phải code)
