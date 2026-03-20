@@ -115,7 +115,8 @@ https://play.google.com/store/apps/details?id=com.dalakgames.pixeldestruction
 
 1. **Source code** — push to a **GitHub** repository and share the link
 2. **APK build** — a working APK for Android (or Windows build if no Android device is available)
-3. **README.md** in the repo including:
+3. **Video demo** — a short video demonstrating the game (screen recording of gameplay, upload to YouTube/Google Drive and include the link)
+4. **README.md** in the repo including:
    - How to open and run the project
    - Brief explanation of the code architecture (main systems)
    - How to use the Level Editor Tool (with screenshots if possible)
@@ -259,7 +260,8 @@ https://play.google.com/store/apps/details?id=com.dalakgames.pixeldestruction
 
 1. **Source code** — push lên **GitHub** repository và gửi link
 2. **Build APK** — 1 file APK chạy được trên Android (hoặc Windows build nếu không có thiết bị Android)
-3. **README.md** trong repo bao gồm:
+3. **Video demo** — quay video ngắn demo gameplay (screen recording, upload lên YouTube/Google Drive và gửi kèm link)
+4. **README.md** trong repo bao gồm:
    - Hướng dẫn mở project và chạy
    - Giải thích ngắn về kiến trúc code (các system chính)
    - Hướng dẫn sử dụng Level Editor Tool (kèm screenshot nếu có)
