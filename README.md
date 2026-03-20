@@ -22,22 +22,51 @@ https://play.google.com/store/apps/details?id=com.dalakgames.pixeldestruction
 
 ### 2.1. Core Gameplay
 
-- [ ] Players can **drag/swipe** to control the weapon to cut objects
-- [ ] Cut objects must have realistic physics responses (fall, split apart, etc.)
-- [ ] Clear **win/lose** conditions for each level
-- [ ] **Basic UI**: gameplay screen, win/lose screen, replay button
+**Objects:**
+- [ ] Objects are composed of **pixels** (small square units forming a shape)
+- [ ] Objects **fall from the top** of the screen under gravity
+- [ ] When an object is **cut in half**, it splits into **2 smaller independent objects** (each behaves as its own physics body, as seen in the reference game)
+- [ ] Objects that are small enough pass through gaps between obstacles and continue falling
+- [ ] Objects that **reach the bottom** are converted into **experience points (XP)**. Conversion rate is configurable by GD (e.g., 1 pixel = 1 XP)
 
-### 2.2. Weapon — Saw
+**Weapons — Saw (Circular Saw):**
+- [ ] The play area has **fixed positions** where weapons (saws) can be placed
+- [ ] The saw has a **spinning animation** while active
+- [ ] When an object contacts the saw, the saw **cuts through the object**, splitting it into smaller pieces
+- [ ] Cutting must have **visual feedback** (particles, trails, or similar)
 
-- [ ] Implement at least **1 weapon: circular saw**
-- [ ] The saw must have a spinning animation while active
-- [ ] Cutting must provide visual feedback (particles, trails, or similar)
-- [ ] The saw must interact correctly with objects — only cuts on contact, no clipping through
+**Obstacles:**
+- [ ] The play area contains **obstacles** that block objects that are too large from passing through
+- [ ] Obstacles force the player to rely on weapons to cut objects small enough to fit through gaps
 
-### 2.3. Levels
+**Tap to Destroy:**
+- [ ] The player can **tap on a pixel** inside an object to deal damage to that pixel and surrounding pixels within a configurable radius
+- [ ] Damage is **highest at the center** (max damage) and **decreases with distance** (min damage at the edge of the radius)
+- [ ] GD can configure: **damage radius**, **max damage**, **min damage**
 
-- [ ] Minimum **5 levels** with progressive difficulty
-- [ ] Each level has a different object layout
+**Leveling & Upgrades:**
+- [ ] Collecting enough XP causes the player to **level up**
+- [ ] XP required per level is configurable: **base XP** for level 1 and **XP increment** per subsequent level (e.g., base=100, increment=50 → level 1 needs 100, level 2 needs 150, level 3 needs 200...)
+- [ ] On each level up, the player is presented with **2 random upgrades** to choose from. The available upgrade pool is:
+  - Saw becomes **longer**
+  - Saw spins **faster**
+  - Saw deals **more DPS** (damage per second)
+  - Add **1 additional saw** (new saw placed at an available position)
+  - Add **1 extra blade** to all existing saws
+
+**Win Condition:**
+- [ ] Each level has a **list of objects** that need to be cut. The game drops objects **gradually** from the top
+- [ ] The game is **won** when all objects have been cut and have successfully reached the bottom
+
+**UI:**
+- [ ] Number of **remaining objects** waiting to be dropped
+- [ ] Current **XP bar** (progress toward next level up)
+- [ ] Current **level** display
+
+### 2.2. Levels
+
+- [ ] Minimum **5 levels** with progressive difficulty (more objects, larger objects, tighter obstacle gaps, etc.)
+- [ ] Each level defines its own **object list**, **obstacle layout**, and **weapon positions**
 - [ ] A **level transition** system (level selection or auto-advance)
 
 ### 2.4. Level Editor Tool (Editor Window / Custom Inspector)
@@ -63,10 +92,9 @@ https://play.google.com/store/apps/details?id=com.dalakgames.pixeldestruction
 
 ### Bonus (Optional)
 
-- Additional weapon (hammer, laser, etc.)
+- Additional weapon types (hammer, laser, etc.)
 - Sound effects & juice (screen shake, slow-motion on cut, etc.)
-- Object pooling for debris
-- Scoring system (stars, points)
+- Object pooling for split pieces and particles
 - Responsive UI for multiple screen ratios
 - **Addressable Asset System** for asset management and loading
 - **Performance optimization** (profiling, reduced GC allocation, draw call batching, etc.)
@@ -130,22 +158,51 @@ https://play.google.com/store/apps/details?id=com.dalakgames.pixeldestruction
 
 ### 2.1. Core Gameplay
 
-- [ ] Người chơi có thể **kéo/swipe** để điều khiển weapon cắt vào vật thể
-- [ ] Vật thể bị cắt phải có phản hồi vật lý hợp lý (rơi, tách ra, v.v.)
-- [ ] Có điều kiện **win/lose** rõ ràng cho mỗi level
-- [ ] Có **UI cơ bản**: màn hình chơi, màn hình win/lose, nút replay
+**Object (Vật thể):**
+- [ ] Vật thể được cấu thành từ **các pixel** (các ô vuông nhỏ tạo thành hình dạng)
+- [ ] Vật thể **rơi từ trên xuống** theo trọng lực
+- [ ] Khi vật thể bị **cắt**, nó tách thành **các object nhỏ hơn độc lập** (mỗi mảnh hoạt động như một physics body riêng, như trong game tham khảo)
+- [ ] Vật thể đủ nhỏ sẽ lọt qua khe giữa các obstacle và tiếp tục rơi xuống
+- [ ] Vật thể **chạm đáy** sẽ được quy đổi thành **kinh nghiệm (XP)**. Mức quy đổi do GD config (ví dụ: 1 pixel = 1 XP)
 
-### 2.2. Weapon — Cái Cưa (Saw)
+**Weapon — Cái Cưa (Circular Saw):**
+- [ ] Trong màn chơi có các **vị trí cố định** để đặt weapon (cưa)
+- [ ] Cưa có **animation quay** khi hoạt động
+- [ ] Khi vật thể chạm vào cưa, cưa **cắt xuyên qua vật thể**, tách thành các mảnh nhỏ hơn
+- [ ] Hiệu ứng cắt phải có **visual feedback** (particle, trail, hoặc tương tự)
 
-- [ ] Implement ít nhất **1 weapon: cái cưa (circular saw)**
-- [ ] Cưa phải có animation quay khi hoạt động
-- [ ] Hiệu ứng cắt phải có visual feedback (particle, trail, hoặc tương tự)
-- [ ] Cưa phải tương tác đúng với vật thể — chỉ cắt khi chạm, không cắt xuyên qua
+**Obstacle (Vật cản):**
+- [ ] Trong màn chơi có các **obstacle** ngăn cản vật thể quá to lọt qua
+- [ ] Obstacle buộc người chơi phải dùng weapon để cắt vật thể đủ nhỏ mới lọt qua khe
 
-### 2.3. Level
+**Tap to Destroy (Chạm để phá hủy):**
+- [ ] Người chơi có thể **tap vào 1 pixel** bên trong object để gây sát thương lên pixel đó và các pixel xung quanh trong bán kính quy định
+- [ ] Sát thương **cao nhất ở tâm** (max damage) và **giảm dần theo khoảng cách** (min damage ở rìa bán kính)
+- [ ] GD có thể config: **bán kính sát thương**, **sát thương max**, **sát thương min**
 
-- [ ] Tối thiểu **5 levels** với độ khó tăng dần
-- [ ] Mỗi level có layout vật thể khác nhau
+**Leveling & Upgrades (Lên cấp & Nâng cấp):**
+- [ ] Thu thập đủ XP sẽ **lên level**
+- [ ] Mức XP yêu cầu mỗi level có thể config: **XP khởi đầu** và **mức tăng thêm** mỗi level (ví dụ: khởi đầu=100, tăng=50 → level 1 cần 100, level 2 cần 150, level 3 cần 200...)
+- [ ] Mỗi lần lên level, người chơi được chọn **1 trong 2 nâng cấp random**. Danh sách nâng cấp:
+  - Cái cưa **dài hơn**
+  - Cái cưa **xoay nhanh hơn**
+  - Cái cưa **gây DPS cao hơn** (damage per second)
+  - Thêm **1 cưa mới** (đặt vào vị trí còn trống)
+  - Thêm **1 lưỡi cưa** vào tất cả các cưa hiện có
+
+**Điều kiện thắng:**
+- [ ] Mỗi level có **danh sách các object** cần được cắt. Game **thả từ từ** các object từ trên xuống
+- [ ] Game **chiến thắng** khi tất cả object đã được cắt và chạm đáy thành công
+
+**UI:**
+- [ ] Số lượng **object còn lại** chờ được thả
+- [ ] **Thanh XP** hiện tại (tiến trình lên level tiếp theo)
+- [ ] Hiển thị **level hiện tại**
+
+### 2.2. Level
+
+- [ ] Tối thiểu **5 levels** với độ khó tăng dần (nhiều object hơn, object lớn hơn, khe obstacle hẹp hơn, v.v.)
+- [ ] Mỗi level định nghĩa riêng **danh sách object**, **layout obstacle**, và **vị trí đặt weapon**
 - [ ] Có hệ thống **chuyển level** (level selection hoặc auto-advance)
 
 ### 2.4. Level Editor Tool (Editor Window / Custom Inspector)
@@ -171,10 +228,9 @@ https://play.google.com/store/apps/details?id=com.dalakgames.pixeldestruction
 
 ### Điểm Cộng (Bonus — Không Bắt Buộc)
 
-- Thêm weapon thứ 2 (búa, laser, v.v.)
+- Thêm loại weapon khác (búa, laser, v.v.)
 - Sound effects & juice (screen shake, slow-motion khi cắt, v.v.)
-- Object pooling cho các mảnh vỡ
-- Hệ thống scoring (sao, điểm)
+- Object pooling cho các mảnh tách và particle
 - Responsive UI cho nhiều tỉ lệ màn hình
 - Sử dụng **Addressable Asset System** để quản lý và load asset
 - Tối ưu **performance** (profiling, giảm GC allocation, batching draw calls, v.v.)
