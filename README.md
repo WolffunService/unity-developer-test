@@ -79,12 +79,21 @@ https://play.google.com/store/apps/details?id=com.dalakgames.pixeldestruction
 
 ### 2.3. Level Editor Tool (Editor Window / Custom Inspector)
 
-- [ ] Create a **Unity Editor Tool** (using `EditorWindow`, `CustomEditor`, or `ScriptableObject` workflow) to support Game Designers:
-  - **Create and arrange objects** in a level through a visual interface (no coding required for GD)
-  - **Configure object properties** (material, size, destructible or not, etc.)
-  - **Save/Load level data** — level config should be stored as data, **ScriptableObject** is recommended. No hard-coding in scenes
+Deliverables — the tool must support the following workflow end-to-end:
+
+- [ ] Open the tool from a menu path (e.g., `Tools/Level Editor`)
+- [ ] Create / select a `LevelConfig` asset (**ScriptableObject** recommended)
+- [ ] Place objects, obstacles, and weapon slots **visually in Scene View** (no manual coordinate entry)
+- [ ] Configure per-object properties (shape, size, destructible flag, material, etc.) via inspector or custom UI
+- [ ] Save level data as an asset file — **no hard-coding in scenes**
+- [ ] Runtime loads from the same asset — round-trip must reproduce the identical layout
 
 > **Purpose:** Evaluate the ability to build tools that support team workflow, not just gameplay coding.
+
+### 2.4. Technical Requirements
+
+- **Core destruction logic** (cutting objects and splitting connected pixel groups) must be self-implemented. You may use a plugin, but you must understand its internals and be able to modify or extend it on request during the interview.
+- **Performance:** stable frame rate on a mid-range mobile device, no memory leaks during extended play.
 
 ---
 
@@ -114,7 +123,7 @@ https://play.google.com/store/apps/details?id=com.dalakgames.pixeldestruction
 ### Required:
 
 1. **Source code** — push to a **GitHub** repository and share the link
-2. **APK build** — a working APK for Android (or Windows build if no Android device is available)
+2. **APK build** — a working APK for Android (or Windows build if no Android device is available). Must build without errors and play smoothly from Menu → Level 1 → Level 5 without crashes
 3. **Video demo** — a short video demonstrating the game (screen recording of gameplay, upload to YouTube/Google Drive and include the link)
 4. **README.md** in the repo including:
    - How to open and run the project
@@ -224,12 +233,21 @@ https://play.google.com/store/apps/details?id=com.dalakgames.pixeldestruction
 
 ### 2.3. Level Editor Tool (Editor Window / Custom Inspector)
 
-- [ ] Tạo **Unity Editor Tool** (dùng `EditorWindow`, `CustomEditor`, hoặc `ScriptableObject` workflow) để hỗ trợ Game Designer:
-  - **Tạo và sắp xếp vật thể** trong level bằng giao diện trực quan (không cần GD phải code)
-  - **Cấu hình thuộc tính** của vật thể (material, kích thước, có phá được hay không, v.v.)
-  - **Save/Load level data** — level config được lưu dưới dạng data, khuyến khích dùng **ScriptableObject**. Không hard-code trong scene
+Deliverable — tool phải hỗ trợ workflow end-to-end như sau:
+
+- [ ] Mở tool qua menu path (ví dụ `Tools/Level Editor`)
+- [ ] Tạo / chọn asset `LevelConfig` (khuyến khích **ScriptableObject**)
+- [ ] Đặt object, obstacle, và weapon slot **visual trong Scene View** (không phải gõ tọa độ tay)
+- [ ] Cấu hình thuộc tính từng object (hình dạng, kích thước, có phá được hay không, material, v.v.) qua inspector hoặc custom UI
+- [ ] Lưu level data dưới dạng asset file — **không hard-code trong scene**
+- [ ] Runtime load từ cùng asset — round-trip phải tái tạo đúng layout ban đầu
 
 > **Mục đích:** Đánh giá khả năng tạo tool phục vụ workflow của team, không chỉ code gameplay.
+
+### 2.4. Yêu Cầu Kỹ Thuật
+
+- **Core destruction logic** (cắt object và tách nhóm pixel kết nối) phải tự implement. Có thể dùng plugin, nhưng bắt buộc phải hiểu rõ internals và có thể chỉnh sửa/mở rộng theo yêu cầu trong buổi phỏng vấn.
+- **Performance:** frame rate ổn định trên thiết bị mobile tầm trung, không memory leak khi chơi liên tục.
 
 ---
 
@@ -259,7 +277,7 @@ https://play.google.com/store/apps/details?id=com.dalakgames.pixeldestruction
 ### Bắt buộc:
 
 1. **Source code** — push lên **GitHub** repository và gửi link
-2. **Build APK** — 1 file APK chạy được trên Android (hoặc Windows build nếu không có thiết bị Android)
+2. **Build APK** — 1 file APK chạy được trên Android (hoặc Windows build nếu không có thiết bị Android). Build không lỗi và chơi mượt từ Menu → Level 1 → Level 5 không crash
 3. **Video demo** — quay video ngắn demo gameplay (screen recording, upload lên YouTube/Google Drive và gửi kèm link)
 4. **README.md** trong repo bao gồm:
    - Hướng dẫn mở project và chạy
