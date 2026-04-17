@@ -5,7 +5,7 @@
 | **Company** | Wolffun |
 | **Position** | Unity Developer |
 | **Duration** | 5 days from the date of receipt |
-| **Unity Version** | 2022.3 LTS (any patch) |
+| **Unity Version** | 2022.3 LTS or Unity 6.3 LTS (any patch) |
 
 ---
 
@@ -150,7 +150,7 @@ https://play.google.com/store/apps/details?id=com.dalakgames.pixeldestruction
 | **Công ty** | Wolffun |
 | **Vị trí** | Unity Developer |
 | **Thời hạn** | 5 ngày kể từ ngày nhận đề |
-| **Unity Version** | 2022.3 LTS (bất kỳ patch nào) |
+| **Unity Version** | 2022.3 LTS hoặc Unity 6.3 LTS (bất kỳ patch nào) |
 
 ---
 
