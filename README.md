@@ -11,10 +11,10 @@
 
 ## 1. Overview
 
-Build a **prototype** for a casual **Pixel Destruction** game — players use tools (weapons) to cut and destroy objects as required by each level.
+Build a **prototype** for a casual **puzzle rescue** game — the player uses color-matching cannons to shoot down the dragon and rescue the girl.
 
 **Gameplay reference:**
-https://play.google.com/store/apps/details?id=com.dalakgames.pixeldestruction
+https://play.google.com/store/apps/details?id=com.save.princess.girl.dragon.out.and
 
 > Candidates should install and play the reference game before starting the test.
 
@@ -24,57 +24,41 @@ https://play.google.com/store/apps/details?id=com.dalakgames.pixeldestruction
 
 ### 2.1. Core Gameplay
 
-> The prototype should be as close to the reference game as possible.
+> The prototype should capture the feel of the reference game. You do **not** need to clone it 1:1 — focus on the main loop below.
 
-**Overview:**
-- [ ] Each level has a **list of objects** that need to be cut. The game **spawns objects gradually** from above
-- [ ] The map contains **obstacles** that block **falling objects**
-- [ ] The player needs to **tap** or **place saws** to destroy the **objects**
+**Main loop:**
+- [ ] Each level places a **girl** that needs rescuing and **one dragon** as the threat
+- [ ] The level contains multiple **colored cannons** at fixed positions
+- [ ] The player **taps a cannon** to fire a projectile matching the cannon's color
+- [ ] Projectiles only damage dragon parts of the **same color**
+- [ ] The level is **won** when the dragon is fully destroyed and the girl is rescued
+- [ ] The level is **lost** when the dragon reaches the girl
 
-**Win Condition:**
-- [ ] The game is **won** when all objects are destroyed and successfully reach the bottom
+**Cannon:**
+- [ ] Each cannon has a fixed **color** and limited **ammo** (configurable per level)
+- [ ] Visual + audio feedback on fire, reload, and empty states
 
-**Object:**
-- [ ] Objects are made up of **pixels** (small square units forming a shape)
-- [ ] Objects **fall downward** due to gravity
-- [ ] When an object is **cut**, it splits into **smaller independent objects** (each piece behaves like its own physics body, similar to the reference game)
-- [ ] Small enough pieces can pass through gaps between obstacles and continue falling
-- [ ] When objects **reach the bottom**, they are converted into **experience points (XP)**. The conversion rate is configurable by GD (e.g., 1 pixel = 1 XP)
+**Dragon:**
+- [ ] The dragon is composed of **multiple colored parts/segments**
+- [ ] Parts take damage only from the matching color
+- [ ] The dragon **moves/advances** toward the girl over time
+- [ ] Destroying parts gives **visual feedback** (particles, shake, etc.)
 
-**Weapon — Circular Saw:**
-- [ ] The level contains **fixed positions** where weapons (saws) can be placed
-- [ ] The saw has a **rotating animation** when active
-- [ ] When an object touches the saw, it is **cut through**, splitting into smaller pieces
-- [ ] Cutting effects must have **visual feedback** (particles, trails, or similar)
-
-**Obstacle:**
-- [ ] The level contains **obstacles** that prevent large objects from passing through
-- [ ] Obstacles force players to use weapons to cut objects small enough to fit through gaps
-- [ ] Saw placement positions also act as **obstacles**
-
-**Tap to Destroy:**
-- [ ] The player can **tap on an object** to deal damage to a pixel area
-- [ ] Damage is **highest at the center** (max damage) and **decreases with distance** (min damage at the edge of the radius)
-- [ ] GD can configure: **damage radius**, **max damage**, **min damage**
-
-**Upgrades Saw:**
-- [ ] Collect enough XP to **receive an upgrade**
-- [ ] XP required for each upgrade is configurable: **starting XP** and **increment per upgrade** (e.g., start = 100, increment = 50 → Upgrade 1 needs 100, Upgrade 2 needs 150, Upgrade 3 needs 200...)
-- [ ] Each time an upgrade is received, the player chooses **1 of 2 random upgrades**. Upgrade options include:
-  - **Larger saw**
-  - **Faster rotation speed**
-  - **Higher damage**
-  - Add **one new saw** (placed in an available slot chosen by the player)
+**Boosters:**
+- [ ] The game must include **3 boosters** the player can use during a level, following the reference game
+- [ ] Booster parameters are **configurable by GD**
+- [ ] Booster activation has clear **visual + audio feedback**
 
 **UI:**
-- [ ] **XP progress bar** for upgrades
-- [ ] Current **level progress and information** (level number)
+- [ ] **Level progress** indicator (dragon HP or parts remaining)
+- [ ] **Current level** number and simple in-level HUD (ammo remaining, booster buttons)
+- [ ] **Win / Lose** screens with retry and next-level buttons
 
 ### 2.2. Level
 
-- [ ] Minimum **5 levels** with increasing difficulty (more objects, larger objects, narrower obstacle gaps, etc.)
-- [ ] After each level, reset the **number of saws** (back to 0) and **all upgrades** (reset to default stats)
-- [ ] Each level defines its own **object list**, **obstacle layout**, and **weapon placement positions**
+- [ ] Minimum **5 levels** with increasing difficulty (more parts, more colors, tighter timing, new obstacle types, etc.)
+- [ ] After each level, **reset per-run state** (ammo, etc.) back to the level's defaults
+- [ ] Each level defines its own **dragon layout**, **cannon placement + colors**, and **win/lose conditions**
 - [ ] Includes a **level transition system** (level selection or auto-advance)
 
 ### 2.3. Level Editor Tool (Editor Window / Custom Inspector)
@@ -83,8 +67,7 @@ Deliverables — the tool must support the following workflow end-to-end:
 
 - [ ] Open the tool from a menu path (e.g., `Tools/Level Editor`)
 - [ ] Create / select a `LevelConfig` asset (**ScriptableObject** recommended)
-- [ ] Place objects, obstacles, and weapon slots **visually in Scene View** (no manual coordinate entry)
-- [ ] Configure per-object properties (shape, size, destructible flag, material, etc.) via inspector or custom UI
+- [ ] Configure per-element properties (color, HP, ammo, etc.) via inspector or custom UI
 - [ ] Save level data as an asset file — **no hard-coding in scenes**
 - [ ] Runtime loads from the same asset — round-trip must reproduce the identical layout
 
@@ -92,7 +75,7 @@ Deliverables — the tool must support the following workflow end-to-end:
 
 ### 2.4. Technical Requirements
 
-- **Core destruction logic** (cutting objects and splitting connected pixel groups) must be self-implemented. You may use a plugin, but you must understand its internals and be able to modify or extend it on request during the interview.
+- **Core gameplay logic** (color-matching damage, dragon progression, win/lose resolution) must be self-implemented. You may use a plugin, but you must understand its internals and be able to modify or extend it on request during the interview.
 - **Performance:** stable frame rate on a mid-range mobile device, no memory leaks during extended play.
 
 ---
@@ -102,16 +85,16 @@ Deliverables — the tool must support the following workflow end-to-end:
 | Criteria | Weight | Description |
 |----------|--------|-------------|
 | **Code Quality** | 35% | Clean code, clear naming, proper separation of concerns, no hard-coding |
-| **Gameplay Feel** | 25% | Smooth cutting feel, reasonable physics, good visual feedback |
+| **Gameplay Feel** | 25% | Responsive input, readable feedback, satisfying hit/destroy reactions |
 | **Level Editor Tool** | 20% | Easy to use, GD-friendly, save/load works correctly |
 | **Project Structure** | 15% | Clean folder structure, proper use of prefabs, easy to extend |
 | **Level Design** | 5% | 5 levels with variety and reasonable progression |
 
 ### Bonus (Optional)
 
-- Additional weapon types (hammer, laser, etc.)
-- Sound effects & juice (screen shake, slow-motion on cut, etc.)
-- Object pooling for split pieces and particles
+- Additional cannon / projectile types
+- Sound effects & juice (screen shake, slow-motion on kill, combo text, etc.)
+- Object pooling for projectiles and particles
 - Responsive UI for multiple screen ratios
 - **Addressable Asset System** for asset management and loading
 - **Performance optimization** (profiling, reduced GC allocation, draw call batching, etc.)
@@ -165,10 +148,10 @@ Deliverables — the tool must support the following workflow end-to-end:
 
 ## 1. Tổng Quan
 
-Xây dựng **prototype** cho một game casual dạng **Pixel Destruction** — người chơi sử dụng các công cụ (weapon) để cắt, phá hủy các vật thể theo yêu cầu của từng level.
+Xây dựng **prototype** cho một game casual dạng **puzzle giải cứu** — người chơi dùng các khẩu đại bác theo màu để bắn hạ rồng và cứu cô gái.
 
 **Tham khảo gameplay:**
-https://play.google.com/store/apps/details?id=com.dalakgames.pixeldestruction
+https://play.google.com/store/apps/details?id=com.save.princess.girl.dragon.out.and
 
 > Ứng viên nên cài và chơi thử game tham khảo trước khi bắt đầu làm bài.
 
@@ -178,57 +161,41 @@ https://play.google.com/store/apps/details?id=com.dalakgames.pixeldestruction
 
 ### 2.1. Core Gameplay
 
-> Prototype càng giống game gốc càng tốt.
+> Prototype cần đúng cảm giác của game tham khảo. Không cần clone 1:1 — tập trung vào main loop bên dưới.
 
-**Overview:**
-- [ ] Mỗi level có **danh sách các object** cần được cắt. Game **thả từ từ** các object từ trên xuống
-- [ ] Trong map sẽ có **obstacle** chặn **object** rơi xuống
-- [ ] Người chơi cần **tap** hoặc **đặt cưa** để phá hủy các **object**
+**Main loop:**
+- [ ] Mỗi level có **cô gái** cần giải cứu và **một con rồng** là mối đe dọa
+- [ ] Level có nhiều **đại bác theo màu** đặt ở vị trí cố định
+- [ ] Người chơi **tap vào đại bác** để bắn viên đạn có màu tương ứng
+- [ ] Đạn chỉ gây sát thương lên phần rồng có **cùng màu**
+- [ ] **Thắng** khi rồng bị phá hủy hoàn toàn và cô gái được cứu
+- [ ] **Thua** khi rồng chạm tới cô gái
 
-**Win Condition:**
-- [ ] Game **chiến thắng** khi tất cả object đã được phá và chạm đáy thành công
+**Đại bác (Cannon):**
+- [ ] Mỗi đại bác có **màu cố định** và **số đạn giới hạn** (config theo level)
+- [ ] Có visual + audio feedback khi bắn, nạp đạn, và hết đạn
 
-**Object (Vật thể):**
-- [ ] Vật thể được cấu thành từ **các pixel** (các ô vuông nhỏ tạo thành hình dạng)
-- [ ] Vật thể **rơi từ trên xuống** theo trọng lực
-- [ ] Khi vật thể bị **cắt**, nó tách thành **các object nhỏ hơn độc lập** (mỗi mảnh hoạt động như một physics body riêng, như trong game tham khảo)
-- [ ] Vật thể đủ nhỏ sẽ lọt qua khe giữa các obstacle và tiếp tục rơi xuống
-- [ ] Vật thể **chạm đáy** sẽ được quy đổi thành **kinh nghiệm (XP)**. Mức quy đổi do GD config (ví dụ: 1 pixel = 1 XP)
+**Rồng (Dragon):**
+- [ ] Rồng gồm **nhiều phần/đoạn có màu**
+- [ ] Mỗi phần chỉ nhận sát thương từ đạn đúng màu
+- [ ] Rồng **di chuyển / tiến dần** về phía cô gái theo thời gian
+- [ ] Phá phần rồng phải có **visual feedback** (particle, shake, v.v.)
 
-**Weapon — Cái Cưa (Circular Saw):**
-- [ ] Trong màn chơi có các **vị trí cố định** để đặt weapon (cưa)
-- [ ] Cưa có **animation quay** khi hoạt động
-- [ ] Khi vật thể chạm vào cưa, cưa **cắt xuyên qua vật thể**, tách thành các mảnh nhỏ hơn
-- [ ] Hiệu ứng cắt phải có **visual feedback** (particle, trail, hoặc tương tự)
-
-**Obstacle (Vật cản):**
-- [ ] Trong màn chơi có các **obstacle** ngăn cản vật thể quá to lọt qua
-- [ ] Obstacle buộc người chơi phải dùng weapon để cắt vật thể đủ nhỏ mới lọt qua khe
-- [ ] Vị trí đặt cưa cũng là **obstacle**
-
-**Tap to Destroy (Chạm để phá hủy):**
-- [ ] Người chơi có thể **Object** để gây sát thương lên một vùng pixel.
-- [ ] Sát thương **cao nhất ở tâm** (max damage) và **giảm dần theo khoảng cách** (min damage ở rìa bán kính)
-- [ ] GD có thể config: **bán kính gây sát thương**, **sát thương max**, **sát thương min**
-
-**Upgrades Saw:**
-- [ ] Thu thập đủ XP sẽ **nhận được Upgrade**
-- [ ] Mức XP yêu cầu sau mỗi lần Upgarde có thể config: **XP khởi đầu** và **mức tăng thêm** mỗi lần Upgrade (ví dụ: khởi đầu=100, tăng=50 → Lần Upgrade 1 cần 100, Lần Upgrade 2 cần 150, Lần Upgrade 3 cần 200...)
-- [ ] Mỗi lần nhận được Upgrade, người chơi được chọn **1 trong 2 nâng cấp random**. Danh sách nâng cấp:
-  - Cái cưa **to hơn**
-  - Cái cưa **xoay nhanh hơn**
-  - Cái cưa **gây sát thương nhiều hơn**
-  - Thêm **1 cưa mới** (đặt vào vị trí còn trống do người chơi chọn)
+**Booster:**
+- [ ] Game phải có **3 booster** người chơi có thể dùng trong level, bám theo game gốc
+- [ ] Tham số booster **do GD config**
+- [ ] Khi kích hoạt booster phải có **visual + audio feedback** rõ ràng
 
 **UI:**
-- [ ] Tiến trình **Thanh XP để nhận Upgrade** 
-- [ ] Tiến trình và thông tin (level bao nhiêu) **level hiện tại**
+- [ ] **Tiến trình level** (HP rồng hoặc số phần còn lại)
+- [ ] **Số level hiện tại** và HUD đơn giản (số đạn còn lại, nút booster)
+- [ ] Màn hình **Win / Lose** với nút retry và next-level
 
 ### 2.2. Level
 
-- [ ] Tối thiểu **5 levels** với độ khó tăng dần (nhiều object hơn, object lớn hơn, khe obstacle hẹp hơn, v.v.)
-- [ ] Sau mỗi Level thì reset **số lượng cưa** (reset về 0) và **các nâng cấp** (reset về chỉ số Default) 
-- [ ] Mỗi level định nghĩa riêng **danh sách object**, **layout obstacle**, và **vị trí đặt weapon**
+- [ ] Tối thiểu **5 levels** với độ khó tăng dần (nhiều phần hơn, nhiều màu hơn, timing chặt hơn, có thêm loại obstacle mới, v.v.)
+- [ ] Sau mỗi level, **reset state mỗi run** (số đạn, v.v.) về default của level
+- [ ] Mỗi level định nghĩa riêng **layout rồng**, **vị trí + màu đại bác**, và **điều kiện thắng/thua**
 - [ ] Có hệ thống **chuyển level** (level selection hoặc auto-advance)
 
 ### 2.3. Level Editor Tool (Editor Window / Custom Inspector)
@@ -237,8 +204,7 @@ Deliverable — tool phải hỗ trợ workflow end-to-end như sau:
 
 - [ ] Mở tool qua menu path (ví dụ `Tools/Level Editor`)
 - [ ] Tạo / chọn asset `LevelConfig` (khuyến khích **ScriptableObject**)
-- [ ] Đặt object, obstacle, và weapon slot **visual trong Scene View** (không phải gõ tọa độ tay)
-- [ ] Cấu hình thuộc tính từng object (hình dạng, kích thước, có phá được hay không, material, v.v.) qua inspector hoặc custom UI
+- [ ] Cấu hình thuộc tính từng element (màu, HP, số đạn, v.v.) qua inspector hoặc custom UI
 - [ ] Lưu level data dưới dạng asset file — **không hard-code trong scene**
 - [ ] Runtime load từ cùng asset — round-trip phải tái tạo đúng layout ban đầu
 
@@ -246,7 +212,7 @@ Deliverable — tool phải hỗ trợ workflow end-to-end như sau:
 
 ### 2.4. Yêu Cầu Kỹ Thuật
 
-- **Core destruction logic** (cắt object và tách nhóm pixel kết nối) phải tự implement. Có thể dùng plugin, nhưng bắt buộc phải hiểu rõ internals và có thể chỉnh sửa/mở rộng theo yêu cầu trong buổi phỏng vấn.
+- **Core gameplay logic** (color-matching damage, rồng di chuyển, xử lý win/lose) phải tự implement. Có thể dùng plugin, nhưng bắt buộc phải hiểu rõ internals và có thể chỉnh sửa/mở rộng theo yêu cầu trong buổi phỏng vấn.
 - **Performance:** frame rate ổn định trên thiết bị mobile tầm trung, không memory leak khi chơi liên tục.
 
 ---
@@ -256,16 +222,16 @@ Deliverable — tool phải hỗ trợ workflow end-to-end như sau:
 | Tiêu chí | Trọng số | Mô tả |
 |-----------|----------|-------|
 | **Code Quality** | 35% | Clean code, đặt tên rõ ràng, tách biệt logic hợp lý, không hard-code |
-| **Gameplay Feel** | 25% | Cảm giác cắt mượt, physics hợp lý, visual feedback tốt |
+| **Gameplay Feel** | 25% | Input nhạy, feedback rõ ràng, cảm giác bắn / phá đã tay |
 | **Level Editor Tool** | 20% | Tool dễ sử dụng, GD-friendly, save/load hoạt động đúng |
 | **Project Structure** | 15% | Folder structure gọn gàng, prefab hợp lý, dễ mở rộng |
 | **Level Design** | 5% | 5 levels có sự đa dạng và progression hợp lý |
 
 ### Điểm Cộng (Bonus — Không Bắt Buộc)
 
-- Thêm loại weapon khác (búa, laser, v.v.)
-- Sound effects & juice (screen shake, slow-motion khi cắt, v.v.)
-- Object pooling cho các mảnh tách và particle
+- Thêm loại đại bác / đạn khác
+- Sound effects & juice (screen shake, slow-motion khi hạ, combo text, v.v.)
+- Object pooling cho đạn và particle
 - Responsive UI cho nhiều tỉ lệ màn hình
 - Sử dụng **Addressable Asset System** để quản lý và load asset
 - Tối ưu **performance** (profiling, giảm GC allocation, batching draw calls, v.v.)
